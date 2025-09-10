@@ -2,17 +2,33 @@ import random
 import numpy as np
 import time
 
-name = ""
-blazerID = ""
+name = "Elizabeth Okunbor"
+blazerID = "eokunbor"
 
 #(1): LINEAR SEARCH
 def linear_search(arr, x):
-    # code linear search
-    return -1 # return index of x, -1 if not found
+    for i in range(len(arr)):
+        if arr[i] == x:
+            return i
+    return -1 
 
 #(2): BINARY SEARCH
 def binary_search(arr, low, high, x):
-    return -1 # return index of x, -1 if not found
+    if low > high:                
+        return -1
+    
+    mid = (low + high) // 2
+    
+    if arr[mid] == x:
+        return mid
+    elif arr[mid] > x:
+        high = mid - 1
+    elif arr[mid] < x:
+        low = mid + 1
+
+    return binary_search(arr, low, high, x)
+    
+
 
 #(3): TEST FUNCTIONS
 '''
@@ -22,13 +38,24 @@ params:
     
 returns:
     returns an array of indices of each key's location, -1 if key is not found
-'''
+''' 
+
 def linear_search_1000(arr, keys):
-    return -1 # return an array of indices of each key
+    k = len(keys)
+    index = [-1] * k
+    for i in range(k):
+        index[i] = linear_search(arr, keys[i])
+    return index
 
 def binary_search_1000(arr, keys):
-    # TODO: SORT THE ORIGINAL ARRAY (arr), DO NOT SET A NEW ARRAY EQUAL TO THE SORTED ARRAY
-    return -1 # return an array of indices of each key
+    arr.sort()
+    k = len(keys)
+    new = len(arr)
+    index = [-1] * k
+    for i in range(k):
+        index[i] = binary_search(arr, 0, new - 1, keys[i])
+    return index
+
 
 ############# DO NOT MODIFY CODE BELOW THIS LINE #############
 
